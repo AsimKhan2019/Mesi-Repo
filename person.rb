@@ -1,7 +1,6 @@
 require 'securerandom'
 require './nameable'
 
-# Person class in order to create a new person with required params
 class Person < Nameable
   attr_accessor :name, :age
   attr_reader :id
