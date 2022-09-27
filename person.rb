@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require 'securerandom'
 
+# Person class in order to create a new person with required params
 class Person
   attr_accessor :name, :age
   attr_reader :id
@@ -12,12 +15,12 @@ class Person
   end
 
   def can_use_services?
-    is_of_age? || parent_permission ? true : false
+    of_age? || parent_permission ? true : false
   end
 
   private
 
-  def is_of_age?
+  def of_age?
     age >= 18
   end
 end
