@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'securerandom'
 
 # Person class in order to create a new person with required params
