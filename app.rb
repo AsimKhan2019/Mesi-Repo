@@ -58,8 +58,9 @@ class App
     puts 'Please add a rental first.' if @rents.empty?
     puts "\n Person\'s ID: "
     p_id = gets.chomp
-    rentals_list = @rents.select { |rental| 
-      rental.person.id == p_id }
+    rentals_list = @rents.select do |rental|
+      rental.person.id == p_id
+    end
     if rentals_list.empty?
       puts 'No rentals found for this person.'
     else
@@ -85,50 +86,48 @@ class App
   end
 
   def validate_age(age)
-    age.to_i.to_s == age ? true : false
+    age.to_i.to_s == age
   end
 
   def create_teacher
     print 'Age: '
     age = gets.chomp
-    if !validate_age(age)
-      puts 'Please enter a valid age!'
-      create_teacher
-    else
+    if validate_age(age)
       print 'Name: '
       name = gets.chomp
       print 'Specialization: '
       specialization = gets.chomp
       teacher = Teacher.new(age, name, specialization)
       @people.push(teacher)
+    else
+      puts 'Please enter a valid age!'
+      create_teacher
     end
   end
 
-  def permit(_letter)
-    'N' ? false : true
+  def permit(letter)
+    (letter != 'N')
   end
 
   def create_student
     print 'Age: '
     age = gets.chomp
-    if !validate_age(age)
-      puts 'Please enter a valid age!'
-      create_student
-    else
+    if validate_age(age)
       print 'Name: '
       name = gets.chomp
       print 'Has parent permission? [Y/N]: '
-      while agree = gets.chomp
-        puts "This is the value of agree #{agree}"
-        if agree == 'n' || agree == 'y'
+      while (agree = gets.chomp)
+        if %w[n y].include?(agree)
           student = Student.new(age, name, permit(agree), nil)
           break
         else
           puts 'Please enter a valid option!'
         end
       end
-      
       @people.push(student)
+    else
+      puts 'Please enter a valid age!'
+      create_student
     end
   end
 
