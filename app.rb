@@ -3,6 +3,7 @@ require './student'
 require './teacher'
 require './book'
 require './rental'
+require './helpers/validators'
 
 class App
   def initialize()
@@ -85,10 +86,6 @@ class App
     run
   end
 
-  def validate_age(age)
-    age.to_i.to_s == age
-  end
-
   def create_teacher
     print 'Age: '
     age = gets.chomp
@@ -103,10 +100,6 @@ class App
       puts 'Please enter a valid age!'
       create_teacher
     end
-  end
-
-  def permit(letter)
-    (letter != 'N')
   end
 
   def create_student
