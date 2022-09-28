@@ -50,15 +50,16 @@ class App
 
   def list_all_people
     @people.each_with_index do |person, idx|
-      puts "#{idx} [#{person.class.name}] Name: #{person.name} Age: #{person.age} ID: #{person.id}}"
+      puts "#{idx} [#{person.class.name}] Name: #{person.name} Age: #{person.age} ID: #{person.id}"
     end
   end
 
   def list_all_rentals_for_id
     puts 'Please add a rental first.' if @rents.empty?
     puts "\n Person\'s ID: "
-    p_id = gets.chomp.to_i
-    rentals_list = @rents.select { |rental| rental.person.id == p_id }
+    p_id = gets.chomp
+    rentals_list = @rents.select { |rental| 
+      rental.person.id == p_id }
     if rentals_list.empty?
       puts 'No rentals found for this person.'
     else
@@ -66,6 +67,7 @@ class App
         puts "Date: #{rental.date}, Book:\"#{rental.book.title}\" by #{rental.book.author}"
       end
     end
+    run
   end
 
   def make_list_all_books
@@ -91,7 +93,6 @@ class App
     specialization = gets.chomp
     teacher = Teacher.new(age, name, specialization)
     @people.push(teacher)
-    print @people
   end
 
   def permit(_letter)
@@ -107,7 +108,6 @@ class App
     agree = gets.chomp
     student = Student.new(age, name, permit(agree), nil)
     @people.push(student)
-    print @people
   end
 
   def create_person
@@ -135,6 +135,7 @@ class App
     new_book = Book.new(title, author)
     @books.push(new_book)
     puts "Book created successfully\n"
+    gets
     run
   end
 
@@ -150,6 +151,7 @@ class App
     curr_rent = Rental.new(rental_date, @people[person_idx.to_i], @books[book_index.to_i])
     @rents.push(curr_rent)
     puts 'Rental added successfully'
+    gets
     run
   end
 end
