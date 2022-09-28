@@ -84,15 +84,24 @@ class App
     run
   end
 
+  def validate_age(age)
+    age.to_i.to_s == age ? true : false
+  end
+
   def create_teacher
     print 'Age: '
     age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
-    print 'Specialization: '
-    specialization = gets.chomp
-    teacher = Teacher.new(age, name, specialization)
-    @people.push(teacher)
+    if !validate_age(age)
+      puts 'Please enter a valid age!'
+      create_teacher
+    else
+      print 'Name: '
+      name = gets.chomp
+      print 'Specialization: '
+      specialization = gets.chomp
+      teacher = Teacher.new(age, name, specialization)
+      @people.push(teacher)
+    end
   end
 
   def permit(_letter)
@@ -102,12 +111,25 @@ class App
   def create_student
     print 'Age: '
     age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
-    print 'Has parent permission? [Y/N]: '
-    agree = gets.chomp
-    student = Student.new(age, name, permit(agree), nil)
-    @people.push(student)
+    if !validate_age(age)
+      puts 'Please enter a valid age!'
+      create_student
+    else
+      print 'Name: '
+      name = gets.chomp
+      print 'Has parent permission? [Y/N]: '
+      while agree = gets.chomp
+        puts "This is the value of agree #{agree}"
+        if agree == 'n' || agree == 'y'
+          student = Student.new(age, name, permit(agree), nil)
+          break
+        else
+          puts 'Please enter a valid option!'
+        end
+      end
+      
+      @people.push(student)
+    end
   end
 
   def create_person
