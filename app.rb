@@ -153,12 +153,10 @@ class App
     run
   end
 
-  require 'pry'
   def create_rental
     puts "\nSelect a book from the following list by number"
     list_all_books
     book_index = gets.chomp
-    if @books[book_index]
       puts "\nSelect a person from the following list by number"
       list_all_people
       person_idx = gets.chomp
@@ -169,9 +167,5 @@ class App
       puts 'Rental added successfully'
       gets
       run
-    else
-      puts 'Please enter in a valid book id and try again!!!'
-    end
   end
-  binding.pry
 end
