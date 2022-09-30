@@ -26,7 +26,7 @@ class Test
     curr_rent = Rental.new(rental_date, @testpeople[person_idx.to_i], @testbooks[book_index.to_i])
     @testrents.push(curr_rent)
   end
-  binding.pry
 end
+binding.pry
 
 test = Test.new
